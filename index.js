@@ -69,6 +69,24 @@ app.post('/plus',  function (req, res){
 });
 
 
+app.post('/rectangle',  function (req, res){
+	res.setHeader('Content-Type', 'application/json');
+
+	var width = req.body.width;
+	var long = req.body.long;
+
+	res.send('{ "area": ' + (width*long) + '}');
+});
+
+app.post('/circle',  function (req, res){
+	res.setHeader('Content-Type', 'application/json');
+
+	var radius = req.body.radius;
+
+	res.send('{ "area": ' + (radius*radius*3.14) + '}');
+});
+
+
 app.get('/topsellers',  function (req, res)  {  
 
 		res.setHeader('Content-Type', 'application/json');
