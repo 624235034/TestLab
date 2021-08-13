@@ -106,6 +106,25 @@ app.get('/book/:bookid',  function (req, res)  {
   
 });
 
+app.get('/student/:studentId',  function (req, res)  {  
+	res.setHeader('Content-Type', 'application/json');
+	var studentId = req.params.studentId;
+
+	var booksReference = db.ref("students");
+
+	//Attach an asynchronous callback to read the data
+	booksReference.orderByChild("studentId").equalTo(studentId).on("child_added", 
+				function(snapshot) {					
+					res.json(snapshot.val());
+					booksReference.off("value");
+					}, 
+				function (errorObject) {
+					res.send("The read failed: " + errorObject.code);
+				});
+  
+});
+
+
 
 
 		//Code Here
